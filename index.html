@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-1.6.4.js"></script>
+    <title>BibleVers</title>
 </head>
 <body>
     <h1>BibleVers by <span>orthodebater</span></h1>
     <input type="text" id="query" placeholder="e.g. John 3:16"></input>
-    <button onclick="searchVerse()">Search</button>
+    <button id="btn" onclick="searchVerse()">Search</button>
     <p id="result"></p><br><br><br><br><br>
     <div class="favorites">
         <h3>My favorite Bible verses (Try them!):</h3><br>
@@ -57,6 +58,22 @@
                 document.getElementById("result").innerHTML = data.text
             })
         }
+
+        const button = document.getElementById("btn")
+        const box = document.getElementById("query")
+
+        button.addEventListener("click", function () {
+            $.getJSON("https://bible-api.com/" + document.getElementById("query").value.replace(" ", ""), function(data) {
+                document.getElementById("result").innerHTML = data.text
+            })
+        }); 
+
+        box.addEventListener("keyup", function (event) { 
+            if (event.keyCode == 13) { 
+                button.click(); 
+            } 
+        }); 
+
     </script>
 </body>
 </html>
