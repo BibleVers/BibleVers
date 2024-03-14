@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.6.4.js"></script>
+    <title>BibleVers</title>
+</head>
+<body>
+    <h1>BibleVers by <span>orthodebater</span></h1>
+    <input type="text" id="query" placeholder="e.g. John 3:16"></input>
+    <button onclick="searchVerse()">Search</button>
+    <p id="result"></p><br><br><br><br><br>
+    <div class="favorites">
+        <h3>My favorite Bible verses (Try them!):</h3><br>
+        <ul>
+            <li>Joshua 1:9</li>
+            <li>Philipians 4:13</li>
+            <li>Psalm 37:4</li>
+            <li>John 16:33</li>
+        </ul>
+    </div>
+    <footer>
+        <h4>This site was made by orthodebater on tiktok and is completely free! It uses a Bible Api to find the verse you are looking for</h4>
+    </footer>
+
+    <style>
+        * {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #f03333;
+        }
+
+        input {
+            background-color: black;
+            color: white;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+        }
+
+        span {
+            color: mediumseagreen;
+        }
+
+        .favorites {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+    <script>
+        function searchVerse() {
+            $.getJSON("https://bible-api.com/" + document.getElementById("query").value.replace(" ", ""), function(data) {
+                document.getElementById("result").innerHTML = data.text
+            })
+        }
+    </script>
+</body>
+</html>
